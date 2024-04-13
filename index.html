@@ -26,19 +26,21 @@
 
             <!--loading the modules-->
             <script>
-                require([ "esri/config", "esri/Map", "esri/views/MapView" ], (esriConfig, Map, MapView) => {
+                require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap" ], (esriConfig, Map, MapView, WebMap) => {
 
                     esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
 
-                    const map = new Map({
-                        basemap: "satellite"
+                    const webmap = new WebMap({
+                        portalItem: {
+                            id: "c4796f14a73243e7bd1676d26818293c"
+                        }
                     });
 
                     const view = new MapView({
                         container: "viewDiv",
-                        map: map,
+                        map: webmap,
                         center: [-83.56298591242994, 35.868367471018054],
-                        zoom: 15
+                        zoom: 15,
                     });
 
                  });
