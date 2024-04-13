@@ -26,13 +26,13 @@
 
             <!--loading the modules-->
             <script>
-                require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap" ], (esriConfig, Map, MapView, WebMap) => {
+                require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap", "esri/layers/FeatureLayer" ], (esriConfig, Map, MapView, WebMap, FeatureLayer) => {
 
                     esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
 
                     const webmap = new WebMap({
                         portalItem: {
-                            id: "c4796f14a73243e7bd1676d26818293c"
+                            id: "5d368c9467d94ba299571f1fc59165ce"
                         }
                     });
 
@@ -43,8 +43,14 @@
                         zoom: 15,
                     });
 
-                 });
-                </script>
+                    const layer = new FeatureLayer({ 
+                        url: "https://services5.arcgis.com/ZYK688A64hFRZ5yX/arcgis/rest/services/survey123_7e082ea689db4266a2f79f30ec455e5c_results/FeatureServer"
+                    });
+
+                    webmap.add(layer);
+
+                });
+            </script>
 
         </head>
         <body>
