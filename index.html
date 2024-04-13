@@ -1,4 +1,4 @@
-!DOCTYPE <html>
+<!DOCTYPE html>
     <html>
         <head>
 
@@ -26,9 +26,8 @@
 
             <!--loading the modules-->
             <script>
-                require([ "esri/Map", "esri/views/MapView" ], (Map, MapView) => {
+                require([ "esri/config", "esri/Map", "esri/views/MapView" ], (esriConfig, Map, MapView) => {
 
-                    //adding in API key
                     esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
 
                     const map = new Map({
@@ -36,8 +35,10 @@
                     });
 
                     const view = new MapView({
-                        container: "viewDiv", // Reference to the DOM node that will contain the view
-                        map: map // References the map object
+                        container: "viewDiv",
+                        map: map,
+                        center: [-83.56298591242994, 35.868367471018054],
+                        zoom: 15
                     });
 
                  });
