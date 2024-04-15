@@ -1,61 +1,77 @@
 <!DOCTYPE html>
-    <html>
-        <head>
+<html>
+<head>
+    <!--meta for the browser to allow for mobile first design-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-            <!--meta for the browser to allow for mobile first design-->
-            <meta charset="utf-8" />
-            <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Contour Digitization Study</title>
 
-            <title>Contour Digitization Study</title>
+    <!--importing the css and libraries for esri.js-->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.26/"></script>
 
-            <!--importing the css and libraries for esri.js-->
-            <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
-            <script src="https://js.arcgis.com/4.26/"></script>
+    <!--making my map full screen-->
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .survey123-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #0079c1;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 
-            <!--making my map full screen-->
-            <style>
-                html,
-                body,
-                #viewDiv {
-                 padding: 0;
-                 margin: 0;
-                 height: 100%;
-                 width: 100%;
+    <!--loading the modules-->
+    <script>
+        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap", "esri/layers/FeatureLayer" ], (esriConfig, Map, MapView, WebMap, FeatureLayer) => {
+
+            esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
+
+            const webmap = new WebMap({
+                portalItem: {
+                    id: "5d368c9467d94ba299571f1fc59165ce"
                 }
-            </style>
+            });
 
-            <!--loading the modules-->
-            <script>
-                require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap", "esri/layers/FeatureLayer" ], (esriConfig, Map, MapView, WebMap, FeatureLayer) => {
+            const view = new MapView({
+                container: "viewDiv",
+                map: webmap,
+                center: [-83.56298591242994, 35.868367471018054],
+                zoom: 15,
+            });
 
-                    esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
+            const layer = new FeatureLayer({ 
+                url: "https://services5.arcgis.com/ZYK688A64hFRZ5yX/arcgis/rest/services/survey123_7e082ea689db4266a2f79f30ec455e5c_results/FeatureServer",
+                renderer: {
+                    type: "simple",  // autocasts as new SimpleRenderer()
+                    symbol: {
+                        type: "simple-line",  // autocasts as new SimpleLineSymbol()
+                        color: [0, 255, 0, 0.8],
+                        width: "2px"  // width of the line
+                    }
+                }
+            });
 
-                    const webmap = new WebMap({
-                        portalItem: {
-                            id: "5d368c9467d94ba299571f1fc59165ce"
-                        }
-                    });
+            webmap.add(layer);
 
-                    const view = new MapView({
-                        container: "viewDiv",
-                        map: webmap,
-                        center: [-83.56298591242994, 35.868367471018054],
-                        zoom: 15,
-                    });
-
-                    const layer = new FeatureLayer({ 
-                        url: "https://services5.arcgis.com/ZYK688A64hFRZ5yX/arcgis/rest/services/survey123_7e082ea689db4266a2f79f30ec455e5c_results/FeatureServer"
-                    });
-
-                    webmap.add(layer);
-
-                });
-            </script>
-
-        </head>
-        <body>
-
-            <div id="viewDiv"></div>
-
-        </body>
+        });
+    </script>
+</head>
+<body>
+    <div id="viewDiv">
+        <a href="https://etsu.maps.arcgis.com/home/item.html?id=7e082ea689db4266a2f79f30ec455e5c" target="_blank" class="survey123-button">Go to Survey123</a>
+    </div>
+</body>
 </html>
