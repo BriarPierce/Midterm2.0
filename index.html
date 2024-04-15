@@ -60,8 +60,59 @@
             });
 
             const template = new PopupTemplate({
-                title: "{Name}", // Replace with your field name
-                content: "{*}" // Display all attributes
+                title: "{name}", // Replace with your field name
+                content: [
+                    {
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "objectid",
+                                label: "Object ID"
+                            },
+                            {
+                                fieldName: "Shape__Length",
+                                label: "Shape Length"
+                            },
+                            {
+                                fieldName: "CreationDate",
+                                label: "Creation Date",
+                                format: {
+                                    dateFormat: "short-date-short-time"
+                                }
+                            },
+                            {
+                                fieldName: "Creator",
+                                label: "Creator"
+                            },
+                            {
+                                fieldName: "EditDate",
+                                label: "Edit Date",
+                                format: {
+                                    dateFormat: "short-date-short-time"
+                                }
+                            },
+                            {
+                                fieldName: "Editor",
+                                label: "Editor"
+                            },
+                            {
+                                fieldName: "name",
+                                label: "Name"
+                            },
+                            {
+                                fieldName: "email",
+                                label: "Email"
+                            },
+                            {
+                                fieldName: "_date",
+                                label: "Date",
+                                format: {
+                                    dateFormat: "short-date-short-time"
+                                }
+                            }
+                        ]
+                    }
+                ]
             });
 
             const layer = new FeatureLayer({ 
