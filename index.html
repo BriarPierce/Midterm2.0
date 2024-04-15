@@ -35,7 +35,14 @@
 
     <!--loading the modules-->
     <script>
-        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/WebMap", "esri/layers/FeatureLayer" ], (esriConfig, Map, MapView, WebMap, FeatureLayer) => {
+        require([
+            "esri/config", 
+            "esri/Map", 
+            "esri/views/MapView", 
+            "esri/WebMap", 
+            "esri/layers/FeatureLayer", 
+            "esri/PopupTemplate"
+        ], (esriConfig, Map, MapView, WebMap, FeatureLayer, PopupTemplate) => {
 
             esriConfig.apiKey = "AAPK0aee94b5d3fa4c61aef2f6d673b63373r6ZylQKkEbWdEmmxojG-k71cUosjAIB5Xe3c8UbDfw0HC6OxRxrargG4xciHm75i";
 
@@ -52,6 +59,11 @@
                 zoom: 15,
             });
 
+            const template = new PopupTemplate({
+                title: "{Name}", // Replace with your field name
+                content: "{*}" // Display all attributes
+            });
+
             const layer = new FeatureLayer({ 
                 url: "https://services5.arcgis.com/ZYK688A64hFRZ5yX/arcgis/rest/services/survey123_7e082ea689db4266a2f79f30ec455e5c_results/FeatureServer",
                 renderer: {
@@ -61,7 +73,8 @@
                         color: [0, 255, 0, 0.8],
                         width: "2px"  // width of the line
                     }
-                }
+                },
+                popupTemplate: template
             });
 
             webmap.add(layer);
